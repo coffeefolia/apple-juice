@@ -1,3 +1,3 @@
-# apple-juice
+# 🥜 pe-nut 🥜
 
-Temporary project name. This project works with identifying characteristics of a portable executable (PE) file.
+A tool to list forensic information related to Portable Executable (PE) files.
