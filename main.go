@@ -4,6 +4,7 @@ import (
 	"debug/pe"
 	"fmt"
 	"os"
+	"strings"
 )
 
 // variables
@@ -44,8 +45,9 @@ func getSymbols(f *pe.File) {
 }
 
 func getStrings(f *pe.File) {
-	fmt.Println("Strings:\n", string(f.StringTable))
-	fmt.Println()
+	a := string(f.StringTable) // String extracts string from COFF string table st at offset start.
+	b := strings.Replace(a, ".", "\n", -1)
+	fmt.Println(b)
 }
 
 func main() {
@@ -58,9 +60,9 @@ func main() {
 	defer pfile.Close()
 
 	//getOptionalHeader(pfile)                  // Optional Header Characteristics
-	fmt.Printf("DataDirectory:%v\n", dataDir) // Print Data Directory Information
-	getSections(pfile)                        // PE Sections
-	getSymbols(pfile)                         // PE Symbols
-	getStrings(pfile)                         // PE Strings
+	//fmt.Printf("DataDirectory:%v\n", dataDir) // Print Data Directory Information
+	//getSections(pfile)                        // PE Sections
+	//getSymbols(pfile)                         // PE Symbols
+	getStrings(pfile) // PE Strings
 
 }
