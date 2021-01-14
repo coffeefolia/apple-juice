@@ -30,6 +30,7 @@ func main() {
 }
 
 // GET - PE Information Functions
+// Thanks to https://gist.github.com/nokute78/46c1eb6a2f6050db4c5a87845dbdf87c
 func getOptionalHeader(f *pe.File) {
 	fmt.Print("Optional Header Size: ")
 	fmt.Println(sizeOptHeader32, " ", sizeOptHeader64)
