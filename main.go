@@ -11,6 +11,7 @@ import (
 var dataDir [16]pe.DataDirectory
 var sizeOptHeader32 = uint16(binary.Size(pe.OptionalHeader32{}))
 var sizeOptHeader64 = uint16(binary.Size(pe.OptionalHeader64{}))
+var file pe.File
 
 func main() {
 	// Open opens the named file using os.Open and prepares it for use as a PE binary.
@@ -23,7 +24,6 @@ func main() {
 
 	getOptionalHeader(file)                   // Optional Header Characteristics
 	fmt.Printf("DataDirectory:%v\n", dataDir) // Print Data Directory Information
-	getImportedLibraries(file)                // Import Address Table Libraries
 	getSections(file)                         // PE Sections
 	getSymbols(file)                          // PE Symbols
 	getStrings(file)                          // PE Strings
@@ -48,13 +48,8 @@ func getOptionalHeader(f *pe.File) {
 	}
 }
 
-func getImportedLibraries(f *pe.File) {
-	fmt.Println("Import Address Table: TBD")
-	fmt.Println()
-}
-
 func getSections(f *pe.File) {
-	fmt.Println("Sections: TBD")
+	fmt.Println("Sections: ")
 	fmt.Println(f.Sections)
 }
 
@@ -64,6 +59,6 @@ func getSymbols(f *pe.File) {
 }
 
 func getStrings(f *pe.File) {
-	fmt.Println("Strings:\n", f.Symbols)
+	fmt.Println("Strings:\n", f.StringTable)
 	fmt.Println()
 }
