@@ -60,6 +60,6 @@ func getSymbols(f *pe.File) {
 }
 
 func getStrings(f *pe.File) {
-	fmt.Println("Strings:\n", f.StringTable)
+	fmt.Println("Strings:\n", string(f.StringTable))
 	fmt.Println()
 }
