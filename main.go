@@ -8,26 +8,10 @@ import (
 )
 
 // variables
+var pfile pe.File
 var dataDir [16]pe.DataDirectory
 var sizeOptHeader32 = uint16(binary.Size(pe.OptionalHeader32{}))
 var sizeOptHeader64 = uint16(binary.Size(pe.OptionalHeader64{}))
-var file pe.File
-
-func main() {
-	// Open opens the named file using os.Open and prepares it for use as a PE binary.
-	file, err := pe.Open(os.Args[1])
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "pe.Open:%s\n", err)
-		os.Exit(1)
-	}
-	defer file.Close()
-
-	getOptionalHeader(file)                   // Optional Header Characteristics
-	fmt.Printf("DataDirectory:%v\n", dataDir) // Print Data Directory Information
-	getSections(file)                         // PE Sections
-	getSymbols(file)                          // PE Symbols
-	getStrings(file)                          // PE Strings
-}
 
 // GET - PE Information Functions
 // Thanks to https://gist.github.com/nokute78/46c1eb6a2f6050db4c5a87845dbdf87c
@@ -62,4 +46,21 @@ func getSymbols(f *pe.File) {
 func getStrings(f *pe.File) {
 	fmt.Println("Strings:\n", string(f.StringTable))
 	fmt.Println()
+}
+
+func main() {
+	// Open opens the named file using os.Open and prepares it for use as a PE binary.
+	pfile, err := pe.Open(os.Args[1])
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "pe.Open:%s\n", err)
+		os.Exit(1)
+	}
+	defer pfile.Close()
+
+	getOptionalHeader(pfile)                  // Optional Header Characteristics
+	fmt.Printf("DataDirectory:%v\n", dataDir) // Print Data Directory Information
+	getSections(pfile)                        // PE Sections
+	getSymbols(pfile)                         // PE Symbols
+	getStrings(pfile)                         // PE Strings
+
 }
