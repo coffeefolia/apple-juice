@@ -57,7 +57,7 @@ func main() {
 	}
 	defer pfile.Close()
 
-	getOptionalHeader(pfile)                  // Optional Header Characteristics
+	//getOptionalHeader(pfile)                  // Optional Header Characteristics
 	fmt.Printf("DataDirectory:%v\n", dataDir) // Print Data Directory Information
 	getSections(pfile)                        // PE Sections
 	getSymbols(pfile)                         // PE Symbols
