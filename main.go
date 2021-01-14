@@ -67,7 +67,3 @@ func getStrings(f *pe.File) {
 	fmt.Println("Strings:\n", f.Symbols)
 	fmt.Println()
 }
-
-func getCOFFSymb(f *pe.File) {
-	fmt.Println("Long Symbol Name:", f.COFFSymbol)
-}
