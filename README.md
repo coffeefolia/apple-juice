@@ -1,3 +1,3 @@
 # 🥜 penut 
 
-A tool to list forensic artifacts gleaned from a Portable Executable (PE) file.
+A tool to examine characteristics of a Portable Executable (PE) file.
